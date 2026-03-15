@@ -1,11 +1,57 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const FLEX_API_URL = process.env.FLEX_API_URL || "https://api.gosurge.xyz";
-const DEMO_MERCHANT_ID = process.env.DEMO_MERCHANT_ID || "";
-const DEMO_MERCHANT_SECRET_KEY = process.env.DEMO_MERCHANT_SECRET_KEY || "";
+const DEMO_MERCHANT_EMAIL = process.env.DEMO_MERCHANT_EMAIL || "";
+const DEMO_MERCHANT_PASSWORD = process.env.DEMO_MERCHANT_PASSWORD || "";
+
+// ── Token cache (survives across warm serverless invocations) ──────────────────
+// Tokens expire in 30 min — we refresh every 25 min to stay safe.
+let cachedToken = "";
+let cachedMerchantId = "";
+let tokenExpiresAt = 0;
+
+async function getAuthToken(): Promise<{ token: string; merchantId: string }> {
+  if (cachedToken && cachedMerchantId && Date.now() < tokenExpiresAt) {
+    return { token: cachedToken, merchantId: cachedMerchantId };
+  }
+
+  const res = await fetch(`${FLEX_API_URL}/api/v1/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: DEMO_MERCHANT_EMAIL,
+      password: DEMO_MERCHANT_PASSWORD,
+    }),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok || !data?.ok) {
+    throw new Error(
+      data?.error?.message || "Demo merchant login failed. Check DEMO_MERCHANT_EMAIL/PASSWORD."
+    );
+  }
+
+  const token: string = data.data?.token;
+  const merchantId: string = data.data?.merchantId;
+
+  if (!token || !merchantId) {
+    throw new Error(
+      "Login succeeded but no token or merchantId returned. Is the demo account approved as a merchant?"
+    );
+  }
+
+  cachedToken = token;
+  cachedMerchantId = merchantId;
+  tokenExpiresAt = Date.now() + 25 * 60 * 1000; // cache for 25 min
+
+  return { token, merchantId };
+}
+
+// ── Route handler ──────────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
-  if (!DEMO_MERCHANT_ID || !DEMO_MERCHANT_SECRET_KEY) {
+  if (!DEMO_MERCHANT_EMAIL || !DEMO_MERCHANT_PASSWORD) {
     return NextResponse.json(
       { error: "Demo merchant credentials are not configured." },
       { status: 500 }
@@ -14,7 +60,7 @@ export async function POST(req: NextRequest) {
 
   let body: {
     amount: number;
-    title: string;
+    title?: string;
     description?: string;
     order_reference?: string;
     customer_email?: string;
@@ -26,36 +72,47 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { amount, title, description, order_reference, customer_email } = body;
+  const { amount, customer_email } = body;
 
-  if (!amount || !title) {
+  if (!amount || amount < 10000) {
+    // 10000 kobo = ₦100
     return NextResponse.json(
-      { error: "amount and title are required." },
+      { error: "amount must be at least ₦100 (10000 kobo)." },
       { status: 400 }
     );
   }
 
   try {
+    const { token, merchantId } = await getAuthToken();
+
     const upstream = await fetch(`${FLEX_API_URL}/api/v1/checkout/sessions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // The demo merchant's JWT token authenticates this server-to-server call.
-        // The secret key NEVER leaves the server — it is not accessible to browser clients.
-        Authorization: `Bearer ${DEMO_MERCHANT_SECRET_KEY}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        merchant_id: DEMO_MERCHANT_ID,
+        merchant_id: merchantId,
         amount,
         currency: "NGN",
-        title,
-        description: description ?? "",
-        order_reference: order_reference ?? `demo-${Date.now()}`,
+        title: "Surge Demo Checkout",
+        description: "Test the Surge BNPL experience",
+        order_reference: `demo-${Date.now()}`,
         customer_email: customer_email ?? "",
       }),
     });
 
     const data = await upstream.json();
+
+    if (upstream.status === 401) {
+      // Token rejected — clear cache and retry once
+      cachedToken = "";
+      tokenExpiresAt = 0;
+      return NextResponse.json(
+        { error: "Session expired. Please try again." },
+        { status: 401 }
+      );
+    }
 
     if (!upstream.ok) {
       return NextResponse.json(data, { status: upstream.status });
@@ -63,10 +120,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(data);
   } catch (err) {
-    console.error("[create-session] upstream error:", err);
-    return NextResponse.json(
-      { error: "Failed to create checkout session. Please try again." },
-      { status: 502 }
-    );
+    const msg = err instanceof Error ? err.message : "Unexpected error.";
+    console.error("[create-session] error:", msg);
+    return NextResponse.json({ error: msg }, { status: 502 });
   }
 }
