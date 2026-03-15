@@ -28,7 +28,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-xl">⚡</span>
-            <span className="font-bold text-lg text-slate-900">Flex Connect</span>
+            <span className="font-bold text-lg text-slate-900">Surge</span>
           </div>
           <div className="flex items-center gap-6">
             <Link
@@ -45,12 +45,18 @@ export default function HomePage() {
             >
               API Docs
             </a>
-            <Link
-              href="/demo"
+            <a
+              href="https://merchant.gosurge.xyz/login"
+              className="hidden sm:block text-sm text-slate-600 hover:text-slate-900 font-medium transition-colors"
+            >
+              Merchant Sign In
+            </a>
+            <a
+              href="https://merchant.gosurge.xyz/register"
               className="bg-[#0A7CFF] hover:bg-[#0061D1] text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors"
             >
-              Try Demo
-            </Link>
+              Get Started
+            </a>
           </div>
         </div>
       </nav>
@@ -77,25 +83,23 @@ export default function HomePage() {
           </h1>
 
           <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10">
-            Flex Connect embeds a full BNPL checkout into any store in minutes.
+            Surge embeds a full BNPL checkout into any store in minutes.
             No redirects. No friction. Just more completed sales.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/demo"
+            <a
+              href="https://merchant.gosurge.xyz/register"
               className="inline-flex items-center justify-center gap-2 bg-[#0A7CFF] hover:bg-[#0061D1] text-white font-bold px-8 py-4 rounded-xl text-base transition-all shadow-lg shadow-blue-500/30 active:scale-[0.98]"
             >
-              ▶&nbsp; Try the Interactive Demo
-            </Link>
-            <a
-              href="https://api.gosurge.xyz/docs"
-              target="_blank"
-              rel="noopener noreferrer"
+              Start Accepting Installments →
+            </a>
+            <Link
+              href="/demo"
               className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-8 py-4 rounded-xl text-base transition-all"
             >
-              Read the Docs →
-            </a>
+              ▶&nbsp; See a Live Demo
+            </Link>
           </div>
 
           {/* Floating stat pills */}
@@ -112,6 +116,74 @@ export default function HomePage() {
                 <span className="text-xl font-black text-blue-300">{s.value}</span>
                 <span className="text-sm text-slate-400">{s.label}</span>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Portals ──────────────────────────────────────────────────────── */}
+      <section className="py-16 bg-white border-b border-slate-100">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">
+            Jump right in
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              {
+                icon: "🏪",
+                label: "Merchant Sign Up",
+                sub: "Start accepting BNPL",
+                href: "https://merchant.gosurge.xyz/register",
+                cta: "Create account",
+                primary: true,
+              },
+              {
+                icon: "🔑",
+                label: "Merchant Sign In",
+                sub: "Access your dashboard",
+                href: "https://merchant.gosurge.xyz/login",
+                cta: "Sign in",
+                primary: false,
+              },
+              {
+                icon: "👤",
+                label: "Customer Sign Up",
+                sub: "Shop now, pay later",
+                href: "https://consumer.gosurge.xyz/register",
+                cta: "Join Surge",
+                primary: true,
+              },
+              {
+                icon: "📱",
+                label: "Customer Login",
+                sub: "Manage your plans",
+                href: "https://consumer.gosurge.xyz",
+                cta: "Sign in",
+                primary: false,
+              },
+            ].map((p) => (
+              <a
+                key={p.label}
+                href={p.href}
+                className={`flex flex-col gap-3 p-5 rounded-2xl border transition-all hover:-translate-y-0.5 hover:shadow-md ${
+                  p.primary
+                    ? "border-blue-100 bg-blue-50/50 hover:border-blue-200"
+                    : "border-slate-100 bg-slate-50 hover:border-slate-200"
+                }`}
+              >
+                <span className="text-2xl">{p.icon}</span>
+                <div>
+                  <p className="font-bold text-slate-900 text-sm">{p.label}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{p.sub}</p>
+                </div>
+                <span
+                  className={`text-xs font-bold mt-auto ${
+                    p.primary ? "text-[#0A7CFF]" : "text-slate-500"
+                  }`}
+                >
+                  {p.cta} →
+                </span>
+              </a>
             ))}
           </div>
         </div>
@@ -134,12 +206,12 @@ export default function HomePage() {
             <ValueProp
               icon="📈"
               title="Increase Conversion"
-              body="Customers are 3× more likely to complete a purchase when they can spread payments. Flex Connect surfaces the option exactly when they need it."
+              body="Customers are 3× more likely to complete a purchase when they can spread payments. Surge surfaces the option exactly when they need it."
             />
             <ValueProp
               icon="🛡️"
               title="Zero Merchant Risk"
-              body="Flex takes on the full credit risk. You get paid upfront. If a customer defaults, that's our problem — not yours."
+              body="Surge takes on the full credit risk. You get paid upfront. If a customer defaults, that's our problem — not yours."
             />
             <ValueProp
               icon="🔌"
@@ -149,12 +221,12 @@ export default function HomePage() {
             <ValueProp
               icon="⚡"
               title="Instant Checkout"
-              body="The Flex widget opens as a modal overlay — customers never leave your page. No redirects, no lost sessions."
+              body="The Surge widget opens as a modal overlay — customers never leave your page. No redirects, no lost sessions."
             />
             <ValueProp
               icon="🏦"
               title="Merchant-Backed Scoring"
-              body="You can set minimum trust tiers for your store. Only customers that meet your risk threshold can check out using Flex."
+              body="You can set minimum trust tiers for your store. Only customers that meet your risk threshold can check out using Surge."
             />
             <ValueProp
               icon="🌍"
@@ -179,7 +251,7 @@ export default function HomePage() {
               <p className="text-slate-500 leading-relaxed mb-8">
                 Drop the SDK into your page, create a checkout session from your
                 backend, and open the widget. That&apos;s it. The rest is
-                handled by Flex.
+                handled by Surge.
               </p>
               <div className="flex flex-col gap-4">
                 {[
@@ -196,7 +268,7 @@ export default function HomePage() {
                   {
                     step: "3",
                     title: "Open the widget",
-                    body: "Call flex.openCheckout({ sessionToken }) — Flex does the rest.",
+                    body: "Call surge.openCheckout({ sessionToken }) — Surge does the rest.",
                   },
                 ].map((item) => (
                   <div key={item.step} className="flex gap-4 items-start">
@@ -209,6 +281,16 @@ export default function HomePage() {
                     </div>
                   </div>
                 ))}
+              </div>
+              <div className="mt-8 flex gap-3">
+                <a
+                  href="https://api.gosurge.xyz/docs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0A7CFF] hover:underline"
+                >
+                  Read the full API docs →
+                </a>
               </div>
             </div>
 
@@ -238,7 +320,7 @@ export default function HomePage() {
                   </CodeLine>
                   <CodeLine>
                     <span className="text-blue-400">const </span>
-                    <span className="text-slate-100">flex </span>
+                    <span className="text-slate-100">surge </span>
                     <span className="text-slate-300">= </span>
                     <span className="text-slate-100">FlexConnect</span>
                     <span className="text-yellow-300">.init</span>
@@ -249,7 +331,7 @@ export default function HomePage() {
                     <span className="text-slate-500">{"// 3. Open on button click"}</span>
                   </CodeLine>
                   <CodeLine>
-                    <span className="text-slate-100">flex</span>
+                    <span className="text-slate-100">surge</span>
                     <span className="text-yellow-300">.openCheckout</span>
                     <span className="text-slate-300">{"({"}</span>
                   </CodeLine>
@@ -285,47 +367,78 @@ export default function HomePage() {
       {/* ── CTA Banner ──────────────────────────────────────────────────── */}
       <section className="py-24 bg-[#0A7CFF]">
         <div className="max-w-3xl mx-auto px-6 text-center text-white">
-          <h2 className="text-4xl font-black mb-5">See it live in 60 seconds.</h2>
+          <h2 className="text-4xl font-black mb-5">Ready to grow your revenue?</h2>
           <p className="text-blue-100 mb-10 text-lg">
-            Our interactive demo walks you through a real checkout — no sign-up
-            required. Add a product to cart and pay with Flex.
+            Join merchants across Nigeria giving their customers the flexibility
+            to buy today and pay over time.
           </p>
-          <Link
-            href="/demo"
-            className="inline-flex items-center gap-2 bg-white text-[#0A7CFF] hover:bg-blue-50 font-black px-10 py-4 rounded-xl text-lg transition-all shadow-xl shadow-blue-700/30 active:scale-[0.98]"
-          >
-            ▶&nbsp; Launch Interactive Demo
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://merchant.gosurge.xyz/register"
+              className="inline-flex items-center justify-center gap-2 bg-white text-[#0A7CFF] hover:bg-blue-50 font-black px-10 py-4 rounded-xl text-lg transition-all shadow-xl shadow-blue-700/30 active:scale-[0.98]"
+            >
+              Create Merchant Account →
+            </a>
+            <Link
+              href="/demo"
+              className="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 border border-white/30 text-white font-bold px-8 py-4 rounded-xl text-base transition-all"
+            >
+              ▶&nbsp; Try the Demo First
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* ── Footer ──────────────────────────────────────────────────────── */}
       <footer className="bg-slate-900 text-slate-400 py-12">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-white">
-            <span className="text-xl">⚡</span>
-            <span className="font-bold">Flex Connect</span>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-start justify-between gap-10 mb-10">
+            {/* Brand */}
+            <div>
+              <div className="flex items-center gap-2 text-white mb-3">
+                <span className="text-xl">⚡</span>
+                <span className="font-bold text-lg">Surge</span>
+              </div>
+              <p className="text-sm max-w-xs leading-relaxed">
+                Nigeria&apos;s embedded BNPL infrastructure. Helping merchants
+                sell more by giving customers flexible payment options.
+              </p>
+            </div>
+
+            {/* Links */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm">
+              <div>
+                <p className="text-white font-bold mb-3">Merchants</p>
+                <ul className="space-y-2">
+                  <li><a href="https://merchant.gosurge.xyz/register" className="hover:text-white transition-colors">Sign Up</a></li>
+                  <li><a href="https://merchant.gosurge.xyz/login" className="hover:text-white transition-colors">Sign In</a></li>
+                  <li><a href="https://api.gosurge.xyz/docs" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">API Docs</a></li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-white font-bold mb-3">Customers</p>
+                <ul className="space-y-2">
+                  <li><a href="https://consumer.gosurge.xyz/register" className="hover:text-white transition-colors">Sign Up</a></li>
+                  <li><a href="https://consumer.gosurge.xyz" className="hover:text-white transition-colors">Sign In</a></li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-white font-bold mb-3">Company</p>
+                <ul className="space-y-2">
+                  <li><Link href="/demo" className="hover:text-white transition-colors">Live Demo</Link></li>
+                  <li><a href="mailto:support@gosurge.xyz" className="hover:text-white transition-colors">Contact</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <p className="text-sm text-center">
-            Built by{" "}
-            <span className="text-white font-medium">Surge</span> · Nigeria&apos;s
-            embedded BNPL infrastructure
-          </p>
-          <div className="flex items-center gap-5 text-sm">
-            <a
-              href="https://api.gosurge.xyz/docs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
-            >
-              API Docs
-            </a>
-            <a
-              href="mailto:support@gosurge.xyz"
-              className="hover:text-white transition-colors"
-            >
-              Contact
-            </a>
+
+          <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+            <p>© 2025 Surge. All rights reserved.</p>
+            <p>
+              Built by{" "}
+              <span className="text-white font-medium">Surge Technologies</span>
+              {" "}· Nigeria&apos;s embedded BNPL infrastructure
+            </p>
           </div>
         </div>
       </footer>

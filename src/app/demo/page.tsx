@@ -209,7 +209,7 @@ export default function DemoPage() {
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/" className="text-slate-400 hover:text-slate-700 text-sm transition-colors">
-              ← Flex Connect
+              ← Surge
             </Link>
             <span className="text-slate-200">|</span>
             <span className="font-bold text-slate-900 text-sm">TechStore NG</span>
@@ -324,7 +324,7 @@ export default function DemoPage() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-slate-900 text-sm">Pay with Flex</span>
+                    <span className="font-bold text-slate-900 text-sm">Pay with Surge</span>
                     <span className="bg-[#0A7CFF] text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wide">
                       Recommended
                     </span>
@@ -361,7 +361,7 @@ export default function DemoPage() {
               ) : (
                 <>
                   <span className="text-xl">⚡</span>
-                  Pay with Flex — Installments from ₦109,800/mo
+                  Pay with Surge — Installments from ₦109,800/mo
                 </>
               )}
             </button>
@@ -370,7 +370,7 @@ export default function DemoPage() {
             <div className="flex items-center justify-center gap-6 text-xs text-slate-400 pt-1">
               <span className="flex items-center gap-1">🔒 SSL Encrypted</span>
               <span className="flex items-center gap-1">🛡️ Buyer Protection</span>
-              <span className="flex items-center gap-1">⚡ Powered by Flex</span>
+              <span className="flex items-center gap-1">⚡ Powered by Surge</span>
             </div>
 
             {/* Explanation box */}
@@ -392,9 +392,9 @@ export default function DemoPage() {
       {/* Footer */}
       <footer className="border-t border-slate-100 bg-white py-6 mt-10">
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-400">
-          <span>TechStore NG — Demo Storefront powered by Flex Connect</span>
+          <span>TechStore NG — Demo Storefront powered by Surge</span>
           <Link href="/" className="text-[#0A7CFF] font-medium hover:underline">
-            ← Back to Flex Connect Home
+            ← Back to Surge Home
           </Link>
         </div>
       </footer>

@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Flex Connect — Embedded BNPL for African Commerce",
+  title: "Surge — Embedded BNPL for African Commerce",
   description:
-    "Let your customers pay in installments without leaving your store. Flex Connect is the easiest way to embed BNPL into any website.",
+    "Let your customers pay-small-small without leaving your store. Surge is Nigeria's embedded BNPL infrastructure — live in under 30 minutes.",
   openGraph: {
-    title: "Flex Connect",
+    title: "Surge",
     description: "Embedded BNPL for African Commerce",
-    url: "https://demo.gosurge.xyz",
+    url: "https://gosurge.xyz",
   },
 };
 
