@@ -2,17 +2,21 @@ import Link from "next/link";
 
 const ValueProp = ({
   icon,
+  iconBg = "bg-blue-50",
   title,
   body,
 }: {
   icon: string;
+  iconBg?: string;
   title: string;
   body: string;
 }) => (
-  <div className="flex flex-col gap-3 p-6 rounded-2xl bg-slate-50 border border-slate-100">
-    <div className="text-3xl">{icon}</div>
-    <h3 className="text-lg font-bold text-slate-900">{title}</h3>
-    <p className="text-sm text-slate-500 leading-relaxed">{body}</p>
+  <div className="flex flex-col gap-4 p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:border-slate-200 transition-all group">
+    <div className={`w-11 h-11 rounded-xl ${iconBg} flex items-center justify-center text-xl`}>{icon}</div>
+    <div>
+      <h3 className="text-base font-bold text-slate-900 mb-1.5">{title}</h3>
+      <p className="text-sm text-slate-500 leading-relaxed">{body}</p>
+    </div>
   </div>
 );
 
@@ -27,7 +31,9 @@ export default function HomePage() {
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xl">⚡</span>
+            <div className="w-7 h-7 rounded-lg bg-[#00d66f] flex items-center justify-center">
+              <span className="text-black text-base font-black">›</span>
+            </div>
             <span className="font-bold text-lg text-slate-900">Surge</span>
           </div>
           <div className="flex items-center gap-6">
@@ -124,13 +130,15 @@ export default function HomePage() {
       {/* ── Portals ──────────────────────────────────────────────────────── */}
       <section className="py-16 bg-white border-b border-slate-100">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">
-            Jump right in
+          <p className="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">
+            Get started now
           </p>
+          <p className="text-center text-sm text-slate-500 mb-8">Everything you need to start selling with Surge.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               {
                 icon: "🏪",
+                iconBg: "bg-blue-100",
                 label: "Merchant Sign Up",
                 sub: "Start accepting BNPL",
                 href: "https://merchant.gosurge.xyz/register",
@@ -139,6 +147,7 @@ export default function HomePage() {
               },
               {
                 icon: "🔑",
+                iconBg: "bg-slate-100",
                 label: "Merchant Sign In",
                 sub: "Access your dashboard",
                 href: "https://merchant.gosurge.xyz/login",
@@ -147,6 +156,7 @@ export default function HomePage() {
               },
               {
                 icon: "👤",
+                iconBg: "bg-emerald-100",
                 label: "Customer Sign Up",
                 sub: "Shop now, pay later",
                 href: "https://consumer.gosurge.xyz/register",
@@ -155,6 +165,7 @@ export default function HomePage() {
               },
               {
                 icon: "📱",
+                iconBg: "bg-slate-100",
                 label: "Customer Login",
                 sub: "Manage your plans",
                 href: "https://consumer.gosurge.xyz",
@@ -171,7 +182,7 @@ export default function HomePage() {
                     : "border-slate-100 bg-slate-50 hover:border-slate-200"
                 }`}
               >
-                <span className="text-2xl">{p.icon}</span>
+                <div className={`w-11 h-11 rounded-xl ${p.iconBg} flex items-center justify-center text-xl`}>{p.icon}</div>
                 <div>
                   <p className="font-bold text-slate-900 text-sm">{p.label}</p>
                   <p className="text-xs text-slate-500 mt-0.5">{p.sub}</p>
@@ -190,7 +201,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Value Props ─────────────────────────────────────────────────── */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-slate-50/50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-14">
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">
@@ -205,31 +216,37 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <ValueProp
               icon="📈"
+              iconBg="bg-blue-50"
               title="Increase Conversion"
               body="Customers are 3× more likely to complete a purchase when they can spread payments. Surge surfaces the option exactly when they need it."
             />
             <ValueProp
               icon="🛡️"
+              iconBg="bg-emerald-50"
               title="Zero Merchant Risk"
               body="Surge takes on the full credit risk. You get paid upfront. If a customer defaults, that's our problem — not yours."
             />
             <ValueProp
               icon="🔌"
+              iconBg="bg-purple-50"
               title="One-Line Integration"
               body="Drop in a single <script> tag and three lines of JavaScript. No backend changes required. Works with any stack."
             />
             <ValueProp
               icon="⚡"
+              iconBg="bg-amber-50"
               title="Instant Checkout"
               body="The Surge widget opens as a modal overlay — customers never leave your page. No redirects, no lost sessions."
             />
             <ValueProp
               icon="🏦"
+              iconBg="bg-cyan-50"
               title="Merchant-Backed Scoring"
               body="You can set minimum trust tiers for your store. Only customers that meet your risk threshold can check out using Surge."
             />
             <ValueProp
               icon="🌍"
+              iconBg="bg-green-50"
               title="Built for Nigeria"
               body="NGN-native, Paystack-powered, and designed around the reality of the Nigerian consumer — including delinquency handling."
             />
@@ -396,7 +413,9 @@ export default function HomePage() {
             {/* Brand */}
             <div>
               <div className="flex items-center gap-2 text-white mb-3">
-                <span className="text-xl">⚡</span>
+                <div className="w-7 h-7 rounded-lg bg-[#00d66f] flex items-center justify-center">
+                  <span className="text-black text-base font-black">›</span>
+                </div>
                 <span className="font-bold text-lg">Surge</span>
               </div>
               <p className="text-sm max-w-xs leading-relaxed">
@@ -433,7 +452,7 @@ export default function HomePage() {
           </div>
 
           <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
-            <p>© 2025 Surge. All rights reserved.</p>
+            <p>© 2026 Surge. All rights reserved.</p>
             <p>
               Built by{" "}
               <span className="text-white font-medium">Surge Technologies</span>
