@@ -16,39 +16,6 @@ const ArrowRight = () => (
   </svg>
 );
 
-/* ─── Animated ticker ─────────────────────────────────────────── */
-const TICKER_ITEMS = [
-  "⚡ Instant Approval",
-  "🛡️ Zero Merchant Risk",
-  "📱 No Redirects",
-  "💳 No Credit Card",
-  "🇳🇬 NGN-Native",
-  "🔌 30-Min Integration",
-  "💸 Pay Small-Small",
-  "📈 Surge Score",
-  "🏦 Paystack-Powered",
-  "⚡ Instant Approval",
-  "🛡️ Zero Merchant Risk",
-  "📱 No Redirects",
-  "💳 No Credit Card",
-  "🇳🇬 NGN-Native",
-  "🔌 30-Min Integration",
-  "💸 Pay Small-Small",
-  "📈 Surge Score",
-  "🏦 Paystack-Powered",
-];
-
-function Ticker() {
-  return (
-    <div className="relative overflow-hidden bg-[#00d66f]/5 border-y border-[#00d66f]/10 py-4">
-      <div className="flex gap-12 animate-ticker whitespace-nowrap">
-        {TICKER_ITEMS.map((item, i) => (
-          <span key={i} className="text-sm font-bold text-[#00d66f] shrink-0">{item}</span>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 /* ─── Fake app UI card ────────────────────────────────────────── */
 function AppCard() {
@@ -359,26 +326,6 @@ export default function HomePage() {
                 )}
               </div>
 
-              {/* Stats */}
-              <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                {(tab === "merchants"
-                  ? [
-                      { v: "+34%", l: "Avg. order lift" },
-                      { v: "< 30 min", l: "Integration" },
-                      { v: "₦0", l: "Merchant risk" },
-                    ]
-                  : [
-                      { v: "₦0", l: "Interest" },
-                      { v: "2 min", l: "Approval time" },
-                      { v: "12×", l: "Max installments" },
-                    ]
-                ).map((s) => (
-                  <div key={s.l} className="flex items-center gap-2.5 bg-white/5 border border-white/8 px-4 py-2.5 rounded-full">
-                    <span className="text-base font-black text-[#00d66f]">{s.v}</span>
-                    <span className="text-xs text-white/40 font-medium">{s.l}</span>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* Right: visual */}
@@ -388,9 +335,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ── Ticker ────────────────────────────────────────────── */}
-      <Ticker />
 
       {/* ── "Built for African commerce" center section ───────── */}
       <section className="py-24 text-center relative overflow-hidden">
