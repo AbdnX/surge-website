@@ -273,11 +273,6 @@ export default function HomePage() {
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             {/* Left: text */}
             <div className="flex-1 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-[#00d66f]/10 border border-[#00d66f]/20 text-[11px] font-black px-4 py-1.5 rounded-full mb-8 uppercase tracking-[0.15em] text-[#00d66f]">
-                <span className="w-1.5 h-1.5 bg-[#00d66f] rounded-full animate-pulse" />
-                Now live across Nigeria
-              </div>
-
               {tab === "merchants" ? (
                 <>
                   <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.0] tracking-tight mb-6 text-white">
