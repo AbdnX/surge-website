@@ -225,40 +225,65 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-[#070B14]">
 
       {/* ── Nav ───────────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-50 bg-[#070B14]/80 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 shrink-0">
-            <div className="w-7 h-7 rounded-lg bg-[#00d66f] flex items-center justify-center">
-              <span className="text-[#0F172A] text-base font-black leading-none">›</span>
-            </div>
-            <span className="font-black text-lg text-white tracking-tight">Surge</span>
-          </div>
-
-          <div className="hidden md:flex items-center gap-6 text-sm text-white/50">
-            <Link href="/demo" className="hover:text-white transition-colors font-medium">Demo</Link>
-            <a href="https://api.gosurge.xyz/docs" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-medium">API Docs</a>
-          </div>
-
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden sm:flex items-center bg-white/5 border border-white/10 rounded-xl p-0.5 gap-0.5">
+      <nav className="sticky top-0 z-50 backdrop-blur-xl">
+        {/* Top bar — tab switcher */}
+        <div className="bg-white/[0.04] border-b border-white/5">
+          <div className="max-w-6xl mx-auto px-6 h-9 flex items-center justify-between">
+            <div className="flex">
               {(["merchants", "consumers"] as const).map((t) => (
                 <button
                   key={t}
                   onClick={() => setTab(t)}
-                  className={`px-3.5 py-1.5 rounded-lg text-[12px] font-bold transition-all capitalize ${
-                    tab === t ? "bg-white text-[#0F172A] shadow-sm" : "text-white/50 hover:text-white"
+                  className={`px-5 h-9 text-[12px] font-bold transition-all border-b-2 ${
+                    tab === t
+                      ? "text-white border-white"
+                      : "text-white/40 border-transparent hover:text-white/70"
                   }`}
                 >
-                  {t === "merchants" ? "Merchants" : "Shoppers"}
+                  {t === "merchants" ? "For Merchants" : "For Shoppers"}
                 </button>
               ))}
             </div>
-            <a
-              href={tab === "merchants" ? "https://merchant.gosurge.xyz/register" : "https://consumer.gosurge.xyz/register"}
-              className="bg-[#00d66f] hover:bg-[#00bf63] text-[#0F172A] text-[13px] font-black px-4 py-2 rounded-xl transition-all whitespace-nowrap"
-            >
-              Get Started
+            <a href="https://api.gosurge.xyz/docs" target="_blank" rel="noopener noreferrer"
+              className="text-[12px] text-white/40 hover:text-white/70 font-medium transition-colors">
+              API Docs
             </a>
+          </div>
+        </div>
+
+        {/* Main bar — logo + links + CTA */}
+        <div className="bg-[#070B14]/90 border-b border-white/5">
+          <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-6">
+            {/* Logo */}
+            <div className="flex items-center gap-2 shrink-0">
+              <div className="w-7 h-7 rounded-lg bg-[#00d66f] flex items-center justify-center">
+                <span className="text-[#0F172A] text-base font-black leading-none">›</span>
+              </div>
+              <span className="font-black text-lg text-white tracking-tight">Surge</span>
+            </div>
+
+            {/* Centre links */}
+            <div className="hidden md:flex items-center gap-6 text-[13px] text-white/50">
+              <Link href="/demo" className="hover:text-white transition-colors font-medium">Demo</Link>
+              <a href="https://merchant.gosurge.xyz" className="hover:text-white transition-colors font-medium">Merchants</a>
+              <a href="https://consumer.gosurge.xyz" className="hover:text-white transition-colors font-medium">Shoppers</a>
+            </div>
+
+            {/* Right: login + CTA */}
+            <div className="flex items-center gap-4 shrink-0">
+              <a
+                href={tab === "merchants" ? "https://merchant.gosurge.xyz/login" : "https://consumer.gosurge.xyz/login"}
+                className="hidden sm:block text-[13px] text-white/50 hover:text-white font-medium transition-colors"
+              >
+                {tab === "merchants" ? "Merchant login" : "Shopper login"}
+              </a>
+              <a
+                href={tab === "merchants" ? "https://merchant.gosurge.xyz/register" : "https://consumer.gosurge.xyz/register"}
+                className="bg-white hover:bg-white/90 text-[#0F172A] text-[13px] font-black px-5 py-2 rounded-full transition-all whitespace-nowrap"
+              >
+                Get Started
+              </a>
+            </div>
           </div>
         </div>
       </nav>
