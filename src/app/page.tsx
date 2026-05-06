@@ -66,27 +66,50 @@ export default function HomePage() {
 
       {/* ── Nav ─────────────────────────────────────────────────── */}
       <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#E8ECF0]">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+          {/* Brand */}
+          <div className="flex items-center gap-2 shrink-0">
             <div className="w-7 h-7 rounded-lg bg-[#00d66f] flex items-center justify-center">
               <span className="text-[#0F172A] text-base font-black">›</span>
             </div>
             <span className="font-bold text-lg text-[#0F172A]">Surge</span>
           </div>
-          <div className="flex items-center gap-6">
+
+          {/* Tab switcher — centered */}
+          <div className="flex items-center bg-[#F1F5F9] rounded-xl p-1 gap-1">
+            <button
+              onClick={() => setTab("merchants")}
+              className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all ${
+                tab === "merchants"
+                  ? "bg-[#0F172A] text-white shadow-sm"
+                  : "text-[#64748B] hover:text-[#0F172A]"
+              }`}
+            >
+              🏪 Merchants
+            </button>
+            <button
+              onClick={() => setTab("consumers")}
+              className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all ${
+                tab === "consumers"
+                  ? "bg-[#0F172A] text-white shadow-sm"
+                  : "text-[#64748B] hover:text-[#0F172A]"
+              }`}
+            >
+              👤 Shoppers
+            </button>
+          </div>
+
+          {/* Right links */}
+          <div className="flex items-center gap-4 shrink-0">
             <Link href="/demo" className="hidden sm:block text-sm text-[#64748B] hover:text-[#0F172A] font-medium transition-colors">
               Live Demo
             </Link>
             <a href="https://api.gosurge.xyz/docs" target="_blank" rel="noopener noreferrer"
-              className="hidden sm:block text-sm text-[#64748B] hover:text-[#0F172A] font-medium transition-colors">
+              className="hidden md:block text-sm text-[#64748B] hover:text-[#0F172A] font-medium transition-colors">
               API Docs
             </a>
-            <a href="https://merchant.gosurge.xyz/login"
-              className="hidden sm:block text-sm text-[#64748B] hover:text-[#0F172A] font-medium transition-colors">
-              Merchant Sign In
-            </a>
-            <a href="https://merchant.gosurge.xyz/register"
-              className="bg-[#0F172A] hover:bg-[#1E293B] text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">
+            <a href={tab === "merchants" ? "https://merchant.gosurge.xyz/register" : "https://consumer.gosurge.xyz/register"}
+              className="bg-[#0F172A] hover:bg-[#1E293B] text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors whitespace-nowrap">
               Get Started
             </a>
           </div>
@@ -127,30 +150,6 @@ export default function HomePage() {
               </p>
             </>
           )}
-
-          {/* Tab switcher */}
-          <div className="inline-flex items-center bg-white/10 border border-white/10 rounded-2xl p-1 mb-10">
-            <button
-              onClick={() => setTab("merchants")}
-              className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
-                tab === "merchants"
-                  ? "bg-[#00d66f] text-[#0F172A] shadow-lg shadow-[#00d66f]/20"
-                  : "text-white/60 hover:text-white"
-              }`}
-            >
-              🏪 For Merchants
-            </button>
-            <button
-              onClick={() => setTab("consumers")}
-              className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
-                tab === "consumers"
-                  ? "bg-[#00d66f] text-[#0F172A] shadow-lg shadow-[#00d66f]/20"
-                  : "text-white/60 hover:text-white"
-              }`}
-            >
-              👤 For Shoppers
-            </button>
-          </div>
 
           {/* CTAs */}
           {tab === "merchants" ? (
