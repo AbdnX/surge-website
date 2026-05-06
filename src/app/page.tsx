@@ -194,7 +194,7 @@ function CodeBlock() {
           <span className="text-purple-400">{"<script "}</span>
           <span className="text-green-400">src</span>
           <span className="text-white/60">{"="}</span>
-          <span className="text-yellow-300">{'"https://consumer.gosurge.xyz/flex.js"'}</span>
+          <span className="text-yellow-300">{'"https://consumer.gosurge.xyz/surge.js"'}</span>
           <span className="text-purple-400">{" />"}</span>
         </div>
         <div className="mt-3 text-white/30">{"// 2. Initialise"}</div>
@@ -202,7 +202,7 @@ function CodeBlock() {
           <span className="text-blue-400">const </span>
           <span className="text-white">surge </span>
           <span className="text-white/60">= </span>
-          <span className="text-white">FlexConnect</span>
+          <span className="text-white">SurgeConnect</span>
           <span className="text-yellow-300">.init</span>
           <span className="text-white/60">{"();"}</span>
         </div>
