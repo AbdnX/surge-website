@@ -244,7 +244,7 @@ export default function HomePage() {
                 </button>
               ))}
             </div>
-            <a href="https://api.gosurge.xyz/docs" target="_blank" rel="noopener noreferrer"
+            <a href="https://docs.gosurge.xyz/" target="_blank" rel="noopener noreferrer"
               className="text-[12px] text-white/40 hover:text-white/70 font-medium transition-colors">
               API Docs
             </a>
@@ -525,7 +525,7 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-              <a href="https://api.gosurge.xyz/docs" target="_blank" rel="noopener noreferrer"
+              <a href="https://docs.gosurge.xyz/" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-bold text-[#00d66f] hover:underline">
                 Read the full API docs <ArrowRight />
               </a>
@@ -608,7 +608,7 @@ export default function HomePage() {
                 <ul className="space-y-2.5">
                   <li><a href="https://merchant.gosurge.xyz/register" className="hover:text-white transition-colors">Sign Up</a></li>
                   <li><a href="https://merchant.gosurge.xyz/login" className="hover:text-white transition-colors">Dashboard</a></li>
-                  <li><a href="https://api.gosurge.xyz/docs" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">API Docs</a></li>
+                  <li><a href="https://docs.gosurge.xyz/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">API Docs</a></li>
                 </ul>
               </div>
               <div>
